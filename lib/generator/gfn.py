@@ -119,7 +119,7 @@ class TBGFlowNetGenerator(GeneratorBase):
         self.tokenizer=tokenizer
         self.model = MLP(num_tokens=self.num_tokens, 
                                 num_outputs=self.num_tokens, 
-                                num_hid=1024,
+                                num_hid=2048,
                                 num_layers=2,
                                 max_len=self.max_len,
                                 dropout=0,

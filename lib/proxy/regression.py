@@ -178,7 +178,7 @@ class EnsembleRegressor(nn.Module):
         if reset:
             self.init_model()
 
-        for it in range(self.proxy_num_iterations):
+        for it in tqdm(range(self.proxy_num_iterations)):
             x, y = data.sample(self.args.proxy_num_per_minibatch)
             x = self.tokenizer.process(x).to(self.device)
             y = torch.tensor(y, device=self.device, dtype=torch.float).reshape(-1)
@@ -238,6 +238,10 @@ class EnsembleRegressor(nn.Module):
         if self.args.proxy_arch == "mlp":
             ys = torch.cat([model(x, None).unsqueeze(0) for model in self.models])
         return ys
+    
+    def forward(self, x):
+        #forward is implemented in MLPs
+        raise NotImplementedError
     
     def forward_with_uncertainty(self, x):
         with torch.no_grad():

@@ -254,7 +254,7 @@ def train_generator(args, generator, oracle, tokenizer, dataset):
     print("Training generator")
     visited = []
     rollout_worker = RolloutWorker(args, oracle, tokenizer)
-    for it in range(args.gen_num_iterations + 1):
+    for it in tqdm(range(args.gen_num_iterations + 1)):
         rollout_artifacts = rollout_worker.execute_train_episode_batch(generator, it, dataset)
         visited.extend(rollout_artifacts["visited"])
 

@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 class Vocab:
     def __init__(self, alphabet) -> None:
@@ -41,8 +42,7 @@ class TokenizerWrapper:
                         import pdb; pdb.set_trace();
                 ret_val.append(temp)
             x = ret_val
-
-        return torch.tensor(x, dtype=torch.long)
+        return torch.tensor(np.array(x), dtype=torch.long) if type(x) != torch.Tensor else x
 
     @property
     def itos(self):
